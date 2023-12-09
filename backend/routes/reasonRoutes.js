@@ -1,12 +1,12 @@
 const express = require('express');
-const validateToken = require('../middleware/validateTokenHandler');
+const validateToken = require('../middleware/authenticateUser');
 const {
   createReason,
   getReasons,
   getReasonById,
   updateReason,
   deleteReason,
-} = require('../controllers/reason');
+} = require('../controllers/reasonController');
 
 const reasonRouter = express.Router();
 

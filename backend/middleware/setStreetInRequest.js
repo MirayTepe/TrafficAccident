@@ -1,20 +1,17 @@
-const Street = require('../models/streetModel');
+const District = require('../models/districtModel');
 
-const setStreetInRequest = async (req, res, next) => {
-  try {
-    const streetId = req.params.street_id; // Örnek: route parametresinden alınan street_id
-    const street = await Street.findById(streetId);
+const setDistrictInRequest = async (req, res, next) => {
+ 
+    const districtId = req.params.district_id; // Örnek: route parametresinden alınan street_id
+    const district = await District.findById(districtId);
 
-    if (!street) {
+    if (!district) {
       return res.status(404).json({ message: 'Street not found' });
     }
 
-    req.street = street; // req nesnesine street'i ekleyin
+    req.district = district; // req nesnesine street'i ekleyin
     next(); // Bir sonraki middleware'e geçin veya işlevi devam ettirin
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
+
 };
 
-module.exports = setStreetInRequest;
+module.exports = setDistrictInRequest;

@@ -1,20 +1,32 @@
 const mongoose =require ("mongoose");
 
 const accidentSchema = new mongoose.Schema({
-  street_id: {
+  district: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Street',
-    required: [true, "Please add the street id"],
+    ref: 'District',
+    required: true,
   },
   date: {
     type: Date,
-    required:  [true, "Please add the accident date"],
+    required: true,
+     get: (value) => {
+     return new Date(value).toLocaleDateString("DD-MM-YYYY"); 
+     },
   },
-  reason_id: {
+  time: {
+    type: String,
+    required: true,
+  },
+  // reasons: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Reason',
+  // }],
+  reason:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Reason',
-    required: [true, "Please add the accident reason"],
-  },
+    required: true,
+  }
+
   // Diğer gerekli alanlar
 });
 
