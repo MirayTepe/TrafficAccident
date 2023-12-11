@@ -1,6 +1,5 @@
 const express = require('express');
-const setDistrictInRequest = require('../middleware/setDistrictInRequest');
-const setReasonInRequest = require('../middleware/setReasonInRequest');
+
 const {
   getAccidents,
   createAccident,
