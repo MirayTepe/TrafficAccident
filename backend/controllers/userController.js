@@ -1,5 +1,5 @@
 const expressAsyncHandler = require("express-async-handler");
-const UserRepostory = require("../repostories/userRepostory");
+const UserRepostory = require("../repostories/userRepository");
 const { generateAccessToken, generateRefreshToken, hashPassword } = require("../security/helper");
 const httpStatus = require("http-status");
 

@@ -6,6 +6,8 @@ const accidentRoutes = require("./routes/accidentRoutes.js");
 const reasonRoutes = require("./routes/reasonRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const districtRoutes = require("./routes/districtRoutes.js");
+const vehicleRoutes = require("./routes/vehicleRoutes.js");
+const driverRoutes = require("./routes/driverRoutes.js");
 
 const app = express();
 app.use(cors());
@@ -20,6 +22,8 @@ app.use("/api/accidents", accidentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/districts", districtRoutes);
 app.use("/api/reasons", reasonRoutes);
+app.use("/api/vehicle", vehicleRoutes);
+app.use("/api/driver", driverRoutes);
 
 
 app.listen(port, () => {

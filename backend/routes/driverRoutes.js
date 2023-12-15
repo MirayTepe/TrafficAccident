@@ -8,11 +8,11 @@ const {
     deleteDriver,
 } = require('../controllers/driverController');
 
-const reasonRouter = express.Router();
+const driverRouter = express.Router();
 
 // Routes
-reasonRouter.route('/').get(getDrivers).post(createDriver);
+driverRouter.route('/').get(getDrivers).post(createDriver);
 
-reasonRouter.route('/:id').get(getDriverById).put(updateDriver).delete(deleteDriver);
+driverRouter.route('/:id').get(getDriverById).put(updateDriver).delete(deleteDriver);
 
-module.exports=reasonRouter;
+module.exports=driverRouter;

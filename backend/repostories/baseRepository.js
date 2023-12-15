@@ -1,3 +1,5 @@
+const { default: mongoose } = require("mongoose");
+
 class BaseRepository {
   constructor(model) {
     this.model = model;
@@ -7,12 +9,13 @@ class BaseRepository {
     return await this.model.create(data);
   }
 
-  async getById(id, populateOptions) {
+  async getById(_id, populateOptions) {
     if (populateOptions) {
-      return await this.model.findById(id).populate(populateOptions);
+      return await this.model.findById(_id).populate(populateOptions);
     } else {
-      return await this.model.findById(id);
+      return await this.model.findById(_id);
     }
+    
   }
 
   async getAll(populateOptions) {
@@ -23,19 +26,19 @@ class BaseRepository {
     }
   }
 
-  async update(id, data, populateOptions) {
+  async update(_id, data, populateOptions) {
     const options = { new: true };
     if (populateOptions) {
       options.populate = populateOptions;
     }
-    return await this.model.findByIdAndUpdate(id, data, options);
+    return await this.model.findByIdAndUpdate(_id, data, options);
   }
 
-  async delete(id, populateOptions) {
+  async delete(_id, populateOptions) {
     if (populateOptions) {
-      return await this.model.findByIdAndDelete(id).populate(populateOptions);
+      return await this.model.findByIdAndDelete(_id).populate(populateOptions);
     } else {
-      return await this.model.findByIdAndDelete(id);
+      return await this.model.findByIdAndDelete(_id);
     }
   }
 }

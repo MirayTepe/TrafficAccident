@@ -16,7 +16,9 @@ const vehicleSchema = new mongoose.Schema({
   } ,
  
   speed :{
-    type:double
+    speed: {
+      type: Number, 
+    }
   }
 });
 

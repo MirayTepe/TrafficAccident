@@ -10,7 +10,10 @@ const driverSchema = new mongoose.Schema({
   lastName: {
     type: String,
     required: true,
-  
+  },
+  age:{
+    type:Number,
+    required: true,
   },
   vehicle: {
     type: mongoose.Schema.Types.ObjectId,

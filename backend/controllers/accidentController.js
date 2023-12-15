@@ -1,42 +1,49 @@
-const AccidentRepostory = require("../repostories/accidentRepostory.js");
+const AccidentRepository = require("../repostories/accidentRepository.js");
+
 const getAccidents = async (req, res) => {
-  const accidents = await AccidentRepostory.getAll({ path: 'district reason' });
+  const accidents = await AccidentRepository.getAll({ path: 'district reason driver' });
   return res.status(200).json({
     count: accidents.length,
     data: accidents,
   });
 };
+
 const createAccident = async(req, res) => {
-  const { district,date,time,reason} = req.body;
+  const { accidentType,district,date,time,weather,reason,driver,image} = req.body;
   const newAccident = {
+    accidentType,
     district,
     date,
     time,
-    reason
+    reason,
+    driver,
+    weather,
+    image,
   };
-  const accident = await AccidentRepostory.create(newAccident);
+  const accident = await AccidentRepository.create(newAccident);
   if (!accident) {
     return res.status(400).json({ error: 'Bad Request. Accident creation failed.' });
   }
-
-  
   res.status(201).json(accident);
 };
 
 const getAccidentById = async (req, res) => {
-  const { id } = req.params;
-  const accident = await AccidentRepostory.getById(id,{ path: 'district reason' });
+  const  id = req.params.id;
+  const accident = await AccidentRepository.getById(id,{ path: 'district reason driver' });
   if (!accident) {
     res.status(404);
     throw new Error('Accident not found');
   }
-  res.status(200).json(accident);
+  return res.status(200).json({
+    count: accident.length,
+    data: accident,
+  });
 };
 
 const updateAccident = async (req, res) => {
-  const { id } = req.params;
-  const { district,date,time,reason } = req.body;
-  const result = await AccidentRepostory.update(id, {district,date,time,reason},{ path: 'district reason' });
+  const  id  = req.params.id;
+  const {  accidentType,district,date,time,reason,age,weather,driver,image  } = req.body;
+  const result = await AccidentRepository.update(id, { accidentType,district,date,time,reason,weather,age,driver,image },{ path: 'district reason driver' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');
@@ -45,20 +52,72 @@ const updateAccident = async (req, res) => {
 };
 
 const deleteAccident = async (req, res) => {
-  const { id } = req.params;
-  const result = await AccidentRepostory.delete(id,{ path: 'district reason' });
+  const id  = req.params.id;
+  const result = await AccidentRepository.delete(id,{ path: 'district reason driver weather' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');
   }
-
   res.status(200).json({ message: 'Accident deleted successfully', data: result });
 };
 
+const getAllAccidentsSortedByDateAsc = async (req, res) => {
+  const accidents = await AccidentRepository.getAllAccidentsSortedByDateAsc();
+  res.json(accidents);
+};
+
+const getAllAccidentsSortedByDateDesc= async (req, res) => {
+  const accidents = await AccidentRepository.getAllAccidentsSortedByDateDesc();
+  res.json(accidents);
+};
+
+const getAccidentsByDate = async (req, res) => {
+  const { startDate, endDate } = req.query;
+  const accidents = await AccidentRepository.getAccidentsByDate(startDate, endDate);
+  res.json(accidents);
+};
+
+const getAccidentsByDistrict = async (req, res) => {
+  const { district } = req.params;
+  const accidents = await AccidentRepository.getAccidentsByDistrict(district);
+  res.status(200).json({
+    count: accidents.length,
+    data: accidents,
+  });
+};
+
+const getAccidentsByReason = async (req, res) => {
+  const { reason } = req.params;
+  const accidents = await AccidentRepository.getAccidentsByReason(reason);
+  res.status(200).json({
+    count: accidents.length,
+    data: accidents,
+  });
+};
+const getAccidentsByTime = async (req, res) => {
+  const { hour, minute } = req.params;
+  const parsedHour = parseInt(hour);
+  const parsedMinute = parseInt(minute);
+   if (isNaN(parsedHour) || isNaN(parsedMinute) || parsedHour < 0 || parsedHour > 23 || parsedMinute < 0 || parsedMinute > 59) {
+      return res.status(400).json({ error: 'Geçersiz saat veya dakika değeri.' });
+
+  }
+   const accidents = await AccidentRepository.getAccidentsByTime(parsedHour, parsedMinute);
+    res.status(200).json({
+      count: accidents.length,
+      data: accidents,
+    });
+}
 module.exports = {
   getAccidents,
+  getAllAccidentsSortedByDateAsc,
+  getAllAccidentsSortedByDateDesc,
   createAccident,
   getAccidentById,
   updateAccident,
   deleteAccident,
+  getAccidentsByDate,
+  getAccidentsByDistrict,
+  getAccidentsByReason,
+  getAccidentsByTime,
 };

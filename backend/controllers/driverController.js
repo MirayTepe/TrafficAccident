@@ -1,4 +1,4 @@
-const  DriverRepostory= require('../repostories/driverRepostory.js');
+const  DriverRepostory= require('../repostories/driverRepository.js');
 
 
 const createDriver = async (req, res) => {
@@ -18,7 +18,7 @@ const createDriver = async (req, res) => {
 };
 
 const getDrivers = async (req, res) => {
-  const drivers = await DriverRepostory.getAll();
+  const drivers = await DriverRepostory.getAll({ path: 'vehicle' });
   res.status(200).json({
     count: drivers.length,
     data: drivers,
@@ -26,8 +26,8 @@ const getDrivers = async (req, res) => {
 };
 
 const getDriverById = async (req, res) => {
-  const { id } = req.params;
-  const driver = await DriverRepostory.getById(id);
+  const id  = req.params.id;
+  const driver = await DriverRepostory.getById(id,{ path: ' vehicle' });
   if (!driver) {
     res.status(404);
     throw new Error('Driver not found');
@@ -36,9 +36,9 @@ const getDriverById = async (req, res) => {
 };
 
 const updateDriver = async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
   const { firstName,lastName,vehicle,gender  } = req.body;
-  const result = await AccidentRepostory.update(id, {firstName,lastName,vehicle,gender  }, { new: true });
+  const result = await AccidentRepostory.update(id, {firstName,lastName,vehicle,gender  },{ path: ' vehicle' }, { new: true });
   if (!result) {
     res.status(404);
     throw new Error('Driver not found');
@@ -47,8 +47,8 @@ const updateDriver = async (req, res) => {
 };
 
 const deleteDriver = async (req, res) => {
-  const { id } = req.params;
-  const result = await DriverRepostory.delete(id);
+  const id  = req.params.id;
+  const result = await DriverRepostory.delete(id,{ path: ' vehicle' });
   if (!result) {
     res.status(404);
     throw new Error('Driver not found');

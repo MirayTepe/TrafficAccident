@@ -1,4 +1,4 @@
-const  VehicleRepostory= require('../repostories/vehicleRepostory.js');
+const  VehicleRepostory= require('../repostories/vehicleRepository.js');
 
 
 const createVehicle = async (req, res) => {
@@ -25,7 +25,7 @@ const getVehicles = async (req, res) => {
 };
 
 const getVehicleById = async (req, res) => {
-  const { id } = req.params;
+  const  id = req.params.id;
   const vehicle = await VehicleRepostory.getById(id);
   if (!vehicle) {
     res.status(404);
@@ -35,7 +35,7 @@ const getVehicleById = async (req, res) => {
 };
 
 const updateVehicle = async (req, res) => {
-  const { id } = req.params;
+  const  id = req.params.id;
   const {vehicleType,vehicleAge,vehicleInspection } = req.body;
   const result = await VehicleRepostory.update(id, {vehicleType,vehicleAge,vehicleInspection }, { new: true });
   if (!result) {
@@ -46,7 +46,7 @@ const updateVehicle = async (req, res) => {
 };
 
 const deleteVehicle = async (req, res) => {
-  const { id } = req.params;
+  const  id = req.params.id;
   const result = await DriverRepostory.delete(id);
   if (!result) {
     res.status(404);

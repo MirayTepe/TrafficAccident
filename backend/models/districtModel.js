@@ -2,7 +2,12 @@ const mongoose =require ("mongoose");
 
 
 const districtSchema = new mongoose.Schema({
-  name: {
+  districtName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  streetName: {
     type: String,
     required: true,
     unique: true,

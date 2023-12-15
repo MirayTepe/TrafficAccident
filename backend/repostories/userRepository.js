@@ -1,8 +1,8 @@
 const User = require("../models/userModel");
-const BaseRepostory = require("./baseRepostory");
+const BaseRepository = require("./baseRepository");
 const bcrypt=require("bcrypt");
 
-class UserRepostory extends BaseRepostory {
+class UserRepository extends BaseRepository {
   async getByEmail(email) {
     const user = await User.findOne({ email });
     return user;
@@ -27,4 +27,4 @@ class UserRepostory extends BaseRepostory {
   
 }
 
-module.exports = new UserRepostory(User);
+module.exports = new UserRepository(User);

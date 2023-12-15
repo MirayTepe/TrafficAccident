@@ -1,14 +1,15 @@
-const DistrictRepostory = require('../repostories/districtRepostory.js');
+const DistrictRepostory = require('../repostories/districtRepository.js');
 
 
 const createDistrict = async (req, res) => {
-  const { name } = req.body;
-  if (!name) {
+  const { district_name,street_name } = req.body;
+  if (!district_name) {
     res.status(400);
     throw new Error('All fields are mandatory!');
   }
   const newDistrict = {
-    name,
+    district_name,
+    street_name,
     // location: {
     //   type: "Point",
     //   coordinates: coordinates || [0, 0], // Default coordinates
@@ -31,7 +32,7 @@ const getDistricts = async (req, res) => {
 };
 
 const getDistrictById = async (req, res) => {
-  const { id } = req.params;
+  const  id  = req.params.id;
   const district = await DistrictRepostory.getById(id);
   if (!district) {
     res.status(404);
@@ -41,9 +42,9 @@ const getDistrictById = async (req, res) => {
 };
 
 const updateDistrict = async (req, res) => {
-  const { id } = req.params;
-  const { name } = req.body;
-  const result = await DistrictRepostory.update(id, { name }, { new: true });
+  const id  = req.params.id;
+  const { district_name,street_name } = req.body;
+  const result = await DistrictRepostory.update(id, { district_name,street_name }, { new: true });
   if (!result) {
     res.status(404);
     throw new Error('District not found');
@@ -52,7 +53,7 @@ const updateDistrict = async (req, res) => {
 };
 
 const deleteDistrict = async (req, res) => {
-  const { id } = req.params;
+  const id  = req.params.id;
   const result = await DistrictRepostory.delete(id);
   if (!result) {
     res.status(404);

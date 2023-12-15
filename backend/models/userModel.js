@@ -26,8 +26,8 @@ const userSchema = mongoose.Schema(
       unique: [true, "Email address already taken"],
     },
     roles: {
-      type: [String], // Kullanıcının birden fazla rolü olabilir, bu yüzden dizi olarak tanımlandı
-      default: ["user"], // Varsayılan olarak "user" rolü atanabilir
+      type: [String], 
+      default: ["user"], 
     }
   },
   {

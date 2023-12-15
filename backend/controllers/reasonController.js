@@ -1,4 +1,4 @@
-const ReasonRepostory = require("../repostories/reasonRepostory.js");
+const ReasonRepostory = require("../repostories/reasonRepository.js");
 
 const createReason = async (req, res) => {
   const { reasonDetail } = req.body;
@@ -22,7 +22,7 @@ const getReasons =async (req, res) => {
 };
 
 const getReasonById =async (req, res) => {
-  const { id } = req.params;
+  const id  = req.params.id;
   const reason = await ReasonRepostory.getReasonById(id);
   if (!reason) {
     res.status(404);
@@ -34,7 +34,7 @@ const getReasonById =async (req, res) => {
 };
 
 const updateReason = async (req, res) => {
-  const { id } = req.params;
+  const id  = req.params.id;
   const { reasonDetail } = req.body;
   const result = await ReasonRepostory.update(id, { reasonDetail }, { new: true });
   if (!result) {
@@ -46,7 +46,7 @@ const updateReason = async (req, res) => {
 };
 
 const deleteReason = async (req, res) => {
-  const { id } = req.params;
+  const  id = req.params.id;
   const result = await ReasonRepostory.delete(id);
 
   if (!result) {
