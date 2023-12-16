@@ -1,4 +1,4 @@
-const ReasonRepostory = require("../repostories/reasonRepository.js");
+const ReasonRepostory = require("../repositories/reasonRepository.js");
 
 const createReason = async (req, res) => {
   const { reasonDetail } = req.body;

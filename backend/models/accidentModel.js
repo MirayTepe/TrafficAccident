@@ -43,6 +43,11 @@ const accidentSchema = new mongoose.Schema({
     ref: 'Weather',
     required: true,
   },
+  accidentResult: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'AccidentResult',
+    required: true,
+  },
   image: {
     type: String,
   }

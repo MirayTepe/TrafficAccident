@@ -1,4 +1,4 @@
-const  WeatherRepostory= require('../repostories/weatherRepository.js');
+const  WeatherRepository= require('../repositories/weatherRepository.js');
 
 
 const createWeather= async (req, res) => {
@@ -6,7 +6,7 @@ const createWeather= async (req, res) => {
     const newWeather = {
         weatherType
     };
-    const weather = await weatherRepostory.create(newWeather);
+    const weather = await WeatherRepository.create(newWeather);
     if (!weather) {
       return res.status(400).json({ error: 'Bad Request. Weather creation failed.' });
     }
@@ -15,7 +15,7 @@ const createWeather= async (req, res) => {
 };
 
 const getWeathers = async (req, res) => {
-  const weathers = await weatherRepostory.getAll();
+  const weathers = await WeatherRepository.getAll();
   res.status(200).json({
     count: weathers.length,
     data:weathers,
@@ -24,7 +24,7 @@ const getWeathers = async (req, res) => {
 
 const getWeatherById = async (req, res) => {
   const  id = req.params.id;
-  const weather = await WeathersRepostory.getById(id);
+  const weather = await WeatherRepository.getById(id);
   if (!weather) {
     res.status(404);
     throw new Error('Weather not found');
@@ -35,7 +35,7 @@ const getWeatherById = async (req, res) => {
 const updateWeather = async (req, res) => {
   const  id = req.params.id; 
   const {weatheType } = req.body;
-  const result = await WeatherRepostory.update(id, {weatheType }, { new: true });
+  const result = await WeatherRepository.update(id, {weatheType }, { new: true });
   if (!result) {
     res.status(404);
     throw new Error('Weather not found');
@@ -45,7 +45,7 @@ const updateWeather = async (req, res) => {
 
 const deleteWeather = async (req, res) => {
   const  id = req.params.id;
-  const result = await weatherRepostory.delete(id);
+  const result = await WeatherRepository.delete(id);
   if (!result) {
     res.status(404);
     throw new Error('Vehicle not found');

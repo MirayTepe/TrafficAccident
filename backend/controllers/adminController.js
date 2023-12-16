@@ -1,23 +1,22 @@
-const expressAsyncHandler = require("express-async-handler");
-const UserRepostory = require("../repostories/userRepository");
+const AdminRepository = require("../repositories/adminRepository.js");
 const { generateAccessToken, generateRefreshToken, hashPassword } = require("../security/helper");
 const httpStatus = require("http-status");
 
 
-const getUsers = async (req, res) => {
+const getAdmins = async (req, res) => {
 
-    const users = await UserRepostory.getAll();
-    res.send(users);
+    const admins = await AdminRepository.getAll();
+    res.send(admins);
 
 };
 
-const getUserByUserNameController = async (req, res) => {
+const getUserByAdminNameController = async (req, res) => {
 
-    const user = await UserRepostory.getByUserName(req.params.username);
-    if (!user) {
+    const admin = await AdminRepository.getByUserName(req.params.username);
+    if (!admin) {
       res.status(httpStatus.NOT_FOUND).send("User not found");
     } else {
-      res.send(user);
+      res.send(admin);
     }
 
 };
@@ -25,7 +24,7 @@ const getUserByUserNameController = async (req, res) => {
 const register = async (req, res) => {
  
     req.body.password = await hashPassword(req.body.password); // Şifreyi hash'le
-    await UserRepostory.create(req.body);
+    await AdminRepository.create(req.body);
     res.status(httpStatus.CREATED).send({ message: "User registered" });
 
 };
@@ -35,8 +34,8 @@ const login = async (req, res) => {
 
 
     // Kullanıcının kimlik bilgilerine göre veritabanından çekilmesi
-    const user = await UserRepostory.getByUserCredentials(email,password);
-    if(!user){
+    const admin = await AdminRepository.getByUserCredentials(email,password);
+    if(!admin){
       res.status(httpStatus.NOT_FOUND).send({ message: "Login failed" });
      
     }
@@ -59,4 +58,4 @@ const login = async (req, res) => {
 
 };
 
-module.exports = { getUsers, getUserByUserNameController, register, login };
+module.exports = { getAdmins, getUserByAdminNameController, register, login };

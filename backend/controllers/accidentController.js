@@ -1,4 +1,4 @@
-const AccidentRepository = require("../repostories/accidentRepository.js");
+const AccidentRepository = require("../repositories/accidentRepository.js");
 
 const getAccidents = async (req, res) => {
   const accidents = await AccidentRepository.getAll({ path: 'district reason driver' });
@@ -9,7 +9,7 @@ const getAccidents = async (req, res) => {
 };
 
 const createAccident = async(req, res) => {
-  const { accidentType,district,date,time,weather,reason,driver,image} = req.body;
+  const { accidentType,district,date,time,weather,reason,driver,image,accidentResult} = req.body;
   const newAccident = {
     accidentType,
     district,
@@ -19,6 +19,7 @@ const createAccident = async(req, res) => {
     driver,
     weather,
     image,
+    accidentResult
   };
   const accident = await AccidentRepository.create(newAccident);
   if (!accident) {
@@ -42,8 +43,8 @@ const getAccidentById = async (req, res) => {
 
 const updateAccident = async (req, res) => {
   const  id  = req.params.id;
-  const {  accidentType,district,date,time,reason,age,weather,driver,image  } = req.body;
-  const result = await AccidentRepository.update(id, { accidentType,district,date,time,reason,weather,age,driver,image },{ path: 'district reason driver' });
+  const {   accidentType,district,date,time,weather,reason,driver,image,accidentResult  } = req.body;
+  const result = await AccidentRepository.update(id, { accidentType,district,date,time,weather,reason,driver,image,accidentResult },{ path: 'district reason driver accidentResult weather' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');

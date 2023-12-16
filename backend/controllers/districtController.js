@@ -1,4 +1,4 @@
-const DistrictRepostory = require('../repostories/districtRepository.js');
+const DistrictRepository = require('../repositories/districtRepository.js');
 
 
 const createDistrict = async (req, res) => {
@@ -15,7 +15,7 @@ const createDistrict = async (req, res) => {
     //   coordinates: coordinates || [0, 0], // Default coordinates
     // }
   };
-  const district = await DistrictRepostory.create(newDistrict);
+  const district = await DistrictRepository.create(newDistrict);
   if (!district) {
     return res.status(400).json({ error: 'Bad Request. District creation failed.' });
   }
@@ -24,7 +24,7 @@ const createDistrict = async (req, res) => {
 };
 
 const getDistricts = async (req, res) => {
-  const districts = await DistrictRepostory.getAll();
+  const districts = await DistrictRepository.getAll();
   res.status(200).json({
     count: districts.length,
     data: districts,
@@ -33,7 +33,7 @@ const getDistricts = async (req, res) => {
 
 const getDistrictById = async (req, res) => {
   const  id  = req.params.id;
-  const district = await DistrictRepostory.getById(id);
+  const district = await DistrictRepository.getById(id);
   if (!district) {
     res.status(404);
     throw new Error('District not found');
@@ -44,7 +44,7 @@ const getDistrictById = async (req, res) => {
 const updateDistrict = async (req, res) => {
   const id  = req.params.id;
   const { district_name,street_name } = req.body;
-  const result = await DistrictRepostory.update(id, { district_name,street_name }, { new: true });
+  const result = await DistrictRepository.update(id, { district_name,street_name }, { new: true });
   if (!result) {
     res.status(404);
     throw new Error('District not found');
@@ -54,7 +54,7 @@ const updateDistrict = async (req, res) => {
 
 const deleteDistrict = async (req, res) => {
   const id  = req.params.id;
-  const result = await DistrictRepostory.delete(id);
+  const result = await DistrictRepository.delete(id);
   if (!result) {
     res.status(404);
     throw new Error('District not found');

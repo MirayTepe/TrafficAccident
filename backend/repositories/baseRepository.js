@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+
 
 class BaseRepository {
   constructor(model) {

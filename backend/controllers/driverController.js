@@ -1,4 +1,4 @@
-const  DriverRepostory= require('../repostories/driverRepository.js');
+const  DriverRepostory= require('../repositories/driverRepository.js');
 
 
 const createDriver = async (req, res) => {

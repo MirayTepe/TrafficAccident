@@ -1,4 +1,4 @@
-const  VehicleRepostory= require('../repostories/vehicleRepository.js');
+const  VehicleRepository= require('../repositories/vehicleRepository.js');
 
 
 const createVehicle = async (req, res) => {
@@ -8,7 +8,7 @@ const createVehicle = async (req, res) => {
       vehicleAge,
       vehicleInspection
     };
-    const vehicle = await VehicleRepostory.create(newVehicle);
+    const vehicle = await VehicleRepository.create(newVehicle);
     if (!accident) {
       return res.status(400).json({ error: 'Bad Request. Vehicle creation failed.' });
     }
@@ -17,7 +17,7 @@ const createVehicle = async (req, res) => {
 };
 
 const getVehicles = async (req, res) => {
-  const vehicles = await VehicleRepostory.getAll();
+  const vehicles = await VehicleRepository.getAll();
   res.status(200).json({
     count: vehicles.length,
     data:vehicles,
@@ -26,7 +26,7 @@ const getVehicles = async (req, res) => {
 
 const getVehicleById = async (req, res) => {
   const  id = req.params.id;
-  const vehicle = await VehicleRepostory.getById(id);
+  const vehicle = await VehicleRepository.getById(id);
   if (!vehicle) {
     res.status(404);
     throw new Error('Vehicle not found');
@@ -37,7 +37,7 @@ const getVehicleById = async (req, res) => {
 const updateVehicle = async (req, res) => {
   const  id = req.params.id;
   const {vehicleType,vehicleAge,vehicleInspection } = req.body;
-  const result = await VehicleRepostory.update(id, {vehicleType,vehicleAge,vehicleInspection }, { new: true });
+  const result = await VehicleRepository.update(id, {vehicleType,vehicleAge,vehicleInspection }, { new: true });
   if (!result) {
     res.status(404);
     throw new Error('Vehicle not found');
