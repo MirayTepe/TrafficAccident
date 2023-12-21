@@ -1,11 +1,7 @@
 const ReasonRepostory = require("../repositories/reasonRepository.js");
 
 const createReason = async (req, res) => {
-  const { reasonDetail } = req.body;
-  const newReason = {
-    reasonDetail,
-  };
-  const reason = await ReasonRepostory.create(newReason);
+  const reason = await ReasonRepostory.create(req.body);
   res.status(201).json(reason);
   if (!reason) {
     return res.status(400).json({ error: 'Bad Request. Reason creation failed.' });

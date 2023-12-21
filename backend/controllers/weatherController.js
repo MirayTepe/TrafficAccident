@@ -2,11 +2,7 @@ const  WeatherRepository= require('../repositories/weatherRepository.js');
 
 
 const createWeather= async (req, res) => {
-    const { weatherType } = req.body;
-    const newWeather = {
-        weatherType
-    };
-    const weather = await WeatherRepository.create(newWeather);
+    const weather = await WeatherRepository.create(req.body);
     if (!weather) {
       return res.status(400).json({ error: 'Bad Request. Weather creation failed.' });
     }

@@ -34,13 +34,13 @@ class AccidentRepository extends BaseRepository {
   }
   async getAccidentsByDistrict(district) {
 
-    const accident = await Accident.find({ district: district });
+    const accident = await Accident.find({ district: district._id });
     return accident;
 
   };
   async getAccidentsByReason(reason) {
 
-    const accident = await Accident.find({ reason: reason });
+    const accident = await Accident.find({ reason: reason._id });
     return accident;
 
   };
@@ -62,6 +62,7 @@ class AccidentRepository extends BaseRepository {
     return accidents;
 
   }
+
 
 
 }

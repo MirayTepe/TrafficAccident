@@ -12,9 +12,9 @@ const reasonSchema = new mongoose.Schema({
 });
 
 
-const reason = mongoose.model('Reason', reasonSchema);
+const Reason = mongoose.model('Reason', reasonSchema);
 
-module.exports=reason;
+module.exports=Reason;
 
 
 

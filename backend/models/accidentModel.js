@@ -4,7 +4,7 @@ const dateFormat = require("date-format");
 const accidentSchema = new mongoose.Schema({
   accidentType: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: String,
+    ref: 'AccidentType',
     required: true,
   },
   district: {
@@ -28,16 +28,16 @@ const accidentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reason: {
+  reasons: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Reason',
     required: true,
-  },
-  driver: {
+  }],
+  drivers: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Driver',
     required: true,
-  },
+  }],
   weather: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Weather',
@@ -47,10 +47,8 @@ const accidentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'AccidentResult',
     required: true,
-  },
-  image: {
-    type: String,
   }
+
 });
 
 // Diğer gerekli alanlar

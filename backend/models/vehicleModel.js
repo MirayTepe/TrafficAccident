@@ -16,16 +16,14 @@ const vehicleSchema = new mongoose.Schema({
   } ,
  
   speed :{
-    speed: {
-      type: Number, 
-    }
+      type: Number
   }
 });
 
 
-const vehicle = mongoose.model('Vehicle', vehicleSchema);
+const Vehicle = mongoose.model('Vehicle', vehicleSchema);
 
-module.exports=vehicle;
+module.exports=Vehicle;
 
 
 

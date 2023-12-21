@@ -9,9 +9,9 @@ const weatherSchema = new mongoose.Schema({
 });
 
 
-const weather = mongoose.model('Weather', weatherSchema);
+const Weather = mongoose.model('Weather', weatherSchema);
 
-module.exports=weather;
+module.exports=Weather;
 
 
 

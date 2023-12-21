@@ -6,7 +6,7 @@ const {
     getAccidentResultById,
     updateAccidentResult,
     deleteAccidentResult,
-} = require('../routes/accidentResultContoller');
+} = require('../controllers/accidentResultController');
 
 const accidentResultRouter = express.Router();
 

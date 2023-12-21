@@ -2,14 +2,9 @@ const  VehicleRepository= require('../repositories/vehicleRepository.js');
 
 
 const createVehicle = async (req, res) => {
-    const { vehicleType,vehicleAge,vehicleInspection } = req.body;
-    const newVehicle = {
-      vehicleType,
-      vehicleAge,
-      vehicleInspection
-    };
-    const vehicle = await VehicleRepository.create(newVehicle);
-    if (!accident) {
+
+    const vehicle = await VehicleRepository.create(req.body);
+    if (!vehicle) {
       return res.status(400).json({ error: 'Bad Request. Vehicle creation failed.' });
     }
 
@@ -36,18 +31,17 @@ const getVehicleById = async (req, res) => {
 
 const updateVehicle = async (req, res) => {
   const  id = req.params.id;
-  const {vehicleType,vehicleAge,vehicleInspection } = req.body;
-  const result = await VehicleRepository.update(id, {vehicleType,vehicleAge,vehicleInspection }, { new: true });
+  const {vehicleType,vehicleAge,vehicleInspection,speed } = req.body;
+  const result = await VehicleRepository.update(id, {vehicleType,vehicleAge,vehicleInspection,speed});
   if (!result) {
-    res.status(404);
-    throw new Error('Vehicle not found');
+    res.status(404).send('Vehicle not found');
   }
   res.status(200).json({ message: 'Vehicle updated successfully', data: result });
 };
 
 const deleteVehicle = async (req, res) => {
   const  id = req.params.id;
-  const result = await DriverRepostory.delete(id);
+  const result = await VehicleRepository.delete(id);
   if (!result) {
     res.status(404);
     throw new Error('Vehicle not found');

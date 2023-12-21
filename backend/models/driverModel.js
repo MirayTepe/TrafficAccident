@@ -5,14 +5,13 @@ const driverSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-  
   },
   lastName: {
     type: String,
     required: true,
   },
-  age:{
-    type:Number,
+  age: {
+    type: Number,
     required: true,
   },
   vehicle: {
@@ -20,18 +19,21 @@ const driverSchema = new mongoose.Schema({
     ref: 'Vehicle',
     required: true,
   },
-  gender:{
-    type:String,
-    required: true
-  }
-
+  gender: {
+    type: String,
+    required: true,
+  },
+  alcoholLevel: {
+    type: Number, // Örneğin, sürücünün alkol düzeyi yüzde cinsinden ifade edilebilir.
+    default: 0, // Varsayılan değer sıfır.
+  },
   // Diğer gerekli alanlar
 });
 
 
-const driver = mongoose.model('Driver', driverSchema);
+const Driver = mongoose.model('Driver', driverSchema);
 
-module.exports=driver;
+module.exports=Driver;
 
 
 

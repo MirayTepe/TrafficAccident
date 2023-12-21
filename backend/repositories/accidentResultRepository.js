@@ -1,4 +1,4 @@
-const AccidentResult = require("../models/accidentModel");
+const AccidentResult = require("../models/accidentResultsModel");
 const BaseRepository = require("./baseRepository");
 
 class AccidentResultRepository extends BaseRepository {

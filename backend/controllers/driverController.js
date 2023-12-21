@@ -2,14 +2,7 @@ const  DriverRepostory= require('../repositories/driverRepository.js');
 
 
 const createDriver = async (req, res) => {
-    const { firstName,lastName,vehicle,gender  } = req.body;
-    const newDriver = {
-      firstName,
-      lastName,
-      vehicle,
-      gender 
-    };
-    const driver = await DriverRepostory.create(newDriver);
+    const driver = await DriverRepostory.create(req.body);
     if (!driver) {
       return res.status(400).json({ error: 'Bad Request. Driver creation failed.' });
     }

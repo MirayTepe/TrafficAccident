@@ -28,10 +28,15 @@ class BaseRepository {
 
   async update(_id, data, populateOptions) {
     const options = { new: true };
+  
+    let query = this.model.findByIdAndUpdate(_id, data, options);
+  
     if (populateOptions) {
-      options.populate = populateOptions;
+      query = query.populate(populateOptions);
     }
-    return await this.model.findByIdAndUpdate(_id, data, options);
+  
+    const updatedDocument = await query.exec();
+    return updatedDocument;
   }
 
   async delete(_id, populateOptions) {

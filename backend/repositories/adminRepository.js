@@ -3,10 +3,6 @@ const BaseRepository = require("./baseRepository");
 const bcrypt = require("bcrypt");
 
 class AdminRepository extends BaseRepository {
-  async getByEmail(email) {
-    const admin = await Admin.findOne({ email });
-    return admin;
-  }
 
   async create(admin) {
     const newAdmin = new Admin(admin);

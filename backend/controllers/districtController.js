@@ -2,18 +2,15 @@ const DistrictRepository = require('../repositories/districtRepository.js');
 
 
 const createDistrict = async (req, res) => {
-  const { district_name,street_name } = req.body;
-  if (!district_name) {
-    res.status(400);
-    throw new Error('All fields are mandatory!');
-  }
+  const { districtName, streetName,location } = req.body;
+  const coordinates = location ? location.coordinates || [0, 0] : [0, 0]; 
   const newDistrict = {
-    district_name,
-    street_name,
-    // location: {
-    //   type: "Point",
-    //   coordinates: coordinates || [0, 0], // Default coordinates
-    // }
+    districtName,
+    streetName,
+    location: {
+      type: "Point",
+      coordinates: coordinates , 
+    }
   };
   const district = await DistrictRepository.create(newDistrict);
   if (!district) {

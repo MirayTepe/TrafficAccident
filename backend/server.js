@@ -8,6 +8,8 @@ const adminRoutes = require("./routes/adminRoutes.js");
 const districtRoutes = require("./routes/districtRoutes.js");
 const vehicleRoutes = require("./routes/vehicleRoutes.js");
 const driverRoutes = require("./routes/driverRoutes.js");
+const accidentResultRoutes = require("./routes/accidentResultRoutes.js");
+const weatherRoutes = require("./routes/weatherRoutes.js");
 const globalErrorHandler = require("./middleware/globalErrorHandler.js");
 
 const app = express();
@@ -23,8 +25,10 @@ app.use("/api/accidents", accidentRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/districts", districtRoutes);
 app.use("/api/reasons", reasonRoutes);
-app.use("/api/vehicle", vehicleRoutes);
-app.use("/api/driver", driverRoutes);
+app.use("/api/vehicles", vehicleRoutes);
+app.use("/api/drivers", driverRoutes);
+app.use("/api/accidentResults", accidentResultRoutes);
+app.use("/api/weathers", weatherRoutes);
 
 app.use(globalErrorHandler);
 
