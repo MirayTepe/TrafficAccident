@@ -1,18 +1,15 @@
 const express = require("express");
 const {authenticateUser} = require("../middleware/authenticateUser");
 const {
-  getAdmins, 
-  getUserByAdminNameController, 
-  register,
-  login
-  } = require('../controllers/adminController');
+  getUsers, getUserByUserNameController, register, login
+  } = require('../controllers/userController');
 
 const router = express.Router();
 
 
-router.get("/", authenticateUser,getAdmins);
+router.get("/", authenticateUser,getUsers);
 
-router.get("/:adminname", authenticateUser,getUserByAdminNameController);
+router.get("/:username", authenticateUser,getUserByUserNameController);
 
 router.post("/register",register);
 

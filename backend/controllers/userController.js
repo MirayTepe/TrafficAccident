@@ -1,22 +1,22 @@
-const AdminRepository = require("../repositories/adminRepository.js");
-const { generateAccessToken, generateRefreshToken, hashPassword } = require("../security/helper");
+const UserRepository = require("../repositories/userRepository.js");
+const { generateAccessToken, generateRefreshToken, hashPassword } = require("../security/helper.js");
 const httpStatus = require("http-status");
 
 
-const getAdmins = async (req, res) => {
+const getUsers = async (req, res) => {
 
-    const admins = await AdminRepository.getAll();
-    res.send(admins);
+    const users = await UserRepository.getAll();
+    res.send(users);
 
 };
 
-const getUserByAdminNameController = async (req, res) => {
+const getUserByUserNameController = async (req, res) => {
 
-    const admin = await AdminRepository.getByUserName(req.params.username);
-    if (!admin) {
+    const user = await UserRepository.getByUserName(req.params.username);
+    if (!user) {
       res.status(httpStatus.NOT_FOUND).send("User not found");
     } else {
-      res.send(admin);
+      res.send(user);
     }
 
 };
@@ -24,7 +24,7 @@ const getUserByAdminNameController = async (req, res) => {
 const register = async (req, res) => {
  
     req.body.password = await hashPassword(req.body.password); // Şifreyi hash'le
-    await AdminRepository.create(req.body);
+    await UserRepository.create(req.body);
     res.status(httpStatus.CREATED).send({ message: "User registered" });
 
 };
@@ -34,8 +34,8 @@ const login = async (req, res) => {
 
 
     // Kullanıcının kimlik bilgilerine göre veritabanından çekilmesi
-    const admin = await AdminRepository.getByUserCredentials(email,password);
-    if(!admin){
+    const user = await UserRepository.getByUserCredentials(email,password);
+    if(!user){
       res.status(httpStatus.NOT_FOUND).send({ message: "Login failed" });
      
     }
@@ -58,4 +58,4 @@ const login = async (req, res) => {
 
 };
 
-module.exports = { getAdmins, getUserByAdminNameController, register, login };
+module.exports = { getUsers, getUserByUserNameController, register, login };

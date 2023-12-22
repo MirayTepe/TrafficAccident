@@ -31,7 +31,7 @@ const getAccidentTypeById = async (req, res) => {
 const updateAccidentType = async (req, res) => {
   const id = req.params.id;
   const {accidentType } = req.body;
-  const result = await AccidentTypeRepository.update(id, {accidentType}, { new: true });
+  const result = await AccidentTypeRepository.update(id, {accidentType});
   if (!result) {
     res.status(404);
     throw new Error('AccidentType not found');

@@ -24,6 +24,11 @@ const adminSchema = new mongoose.Schema({
       required: [true, "Please add the user password"],
       unique: [true, "Email address already taken"],
     },
+    userRole:{
+      type: String,
+      enum: ['admin', 'manager'],
+      default:'admin'
+    } ,
  
   },
   {

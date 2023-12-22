@@ -28,16 +28,7 @@ const accidentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reasons: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Reason',
-    required: true,
-  }],
-  drivers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Driver',
-    required: true,
-  }],
+
   weather: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Weather',
@@ -51,7 +42,7 @@ const accidentSchema = new mongoose.Schema({
 
 });
 
-// Diğer gerekli alanlar
+
 
 const Accident = mongoose.model('Accident', accidentSchema);
 
