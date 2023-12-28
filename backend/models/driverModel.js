@@ -23,6 +23,9 @@ const driverSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  speed :{
+    type: Number
+  },
   alcoholLevel: {
     type: Number, // Örneğin, sürücünün alkol düzeyi yüzde cinsinden ifade edilebilir.
     default: 0, // Varsayılan değer sıfır.

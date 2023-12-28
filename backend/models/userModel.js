@@ -24,6 +24,10 @@ const adminSchema = new mongoose.Schema({
       required: [true, "Please add the user password"],
       unique: [true, "Email address already taken"],
     },
+    phoneNumber:{
+      type: String,
+      required: [true, "Please add the phone number"],
+    },
     userRole:{
       type: String,
       enum: ['admin', 'manager'],

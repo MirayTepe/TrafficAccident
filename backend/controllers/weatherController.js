@@ -30,8 +30,8 @@ const getWeatherById = async (req, res) => {
 
 const updateWeather = async (req, res) => {
   const  id = req.params.id; 
-  const {weatheType } = req.body;
-  const result = await WeatherRepository.update(id, {weatheType }, { new: true });
+  const {weatherType } = req.body;
+  const result = await WeatherRepository.update(id, {weatherType });
   if (!result) {
     res.status(404);
     throw new Error('Weather not found');

@@ -1,7 +1,7 @@
 const AccidentRepository = require("../repositories/accidentRepository.js");
 
 const getAccidents = async (req, res) => {
-  const accidents = await AccidentRepository.getAll({ path: 'district accidentResult weather' });
+  const accidents = await AccidentRepository.getAll({ path: 'district accidentType weather' });
   return res.status(200).json({
     count: accidents.length,
     data: accidents,
@@ -9,10 +9,7 @@ const getAccidents = async (req, res) => {
 };
 
 const createAccident = async(req, res) => {
-  const {   accidentType,district,date,time,weather,accidentResult  } = req.body;
-  const newAccident={ accidentType,district,date,time,weather,accidentResult }
-
-  const accident = await AccidentRepository.create(newAccident);
+  const accident = await AccidentRepository.create(req.body);
   if (!accident) {
     return res.status(400).json({ error: 'Bad Request. Accident creation failed.' });
   }
@@ -21,7 +18,7 @@ const createAccident = async(req, res) => {
 
 const getAccidentById = async (req, res) => {
   const  id = req.params.id;
-  const accident = await AccidentRepository.getById(id,{ path: 'district  accidentResult weather' });
+  const accident = await AccidentRepository.getById(id,{ path: 'district   weather accidentType' });
   if (!accident) {
     res.status(404);
     throw new Error('Accident not found');
@@ -34,8 +31,8 @@ const getAccidentById = async (req, res) => {
 
 const updateAccident = async (req, res) => {
   const  id  = req.params.id;
-  const {   accidentType,district,date,time,weather,accidentResult  } = req.body;
-  const result = await AccidentRepository.update(id, { accidentType,district,date,time,weather,accidentResult },{ path: 'district  accidentResult weather' });
+  const { accidentType,district,date,time,weather, injuryCount,deathCount } = req.body;
+  const result = await AccidentRepository.update(id, { accidentType,district,date,time,weather, injuryCount,deathCount  },{ path: 'district   weather accidentType' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');
@@ -45,7 +42,7 @@ const updateAccident = async (req, res) => {
 
 const deleteAccident = async (req, res) => {
   const id  = req.params.id;
-  const result = await AccidentRepository.delete(id,{ path: 'district weather accidentResult ' });
+  const result = await AccidentRepository.delete(id,{ path: 'district weather  accidentType' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');

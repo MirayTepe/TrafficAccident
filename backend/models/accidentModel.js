@@ -34,9 +34,12 @@ const accidentSchema = new mongoose.Schema({
     ref: 'Weather',
     required: true,
   },
-  accidentResult: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'AccidentResult',
+  deathCount: {
+    type: Number,
+    required: true,
+   },
+  injuryCount: {
+    type: Number,
     required: true,
   }
 

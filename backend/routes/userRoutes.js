@@ -7,9 +7,9 @@ const {
 const router = express.Router();
 
 
-router.get("/", authenticateUser,getUsers);
+router.get("/", getUsers);
 
-router.get("/:username", authenticateUser,getUserByUserNameController);
+router.get("/:username", getUserByUserNameController);
 
 router.post("/register",register);
 

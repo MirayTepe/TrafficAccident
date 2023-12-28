@@ -8,7 +8,7 @@ const accidentReasonSchema = new mongoose.Schema({
     ref: 'Accident',
     required: true,
   },
-  Reason: {
+  reason: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Reason',
     required: true,

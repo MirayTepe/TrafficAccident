@@ -39,7 +39,7 @@ const login = async (req, res) => {
       res.status(httpStatus.NOT_FOUND).send({ message: "Login failed" });
      
     }
-    // Token oluşturup kullanıcıya dönmek (örnek, iş mantığınıza göre düzenleyebilirsiniz)
+    // Token oluşturup kullanıcıya dönmek 
     const tokens = {
       accessToken: generateAccessToken(user),
       refreshToken: generateRefreshToken(user),

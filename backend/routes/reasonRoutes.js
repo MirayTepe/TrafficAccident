@@ -10,8 +10,6 @@ const {
 
 const reasonRouter = express.Router();
 
-// Middleware: Token Doğrulama
-//reasonRouter.use(validateToken);
 
 // Routes
 reasonRouter.route('/').get(getReasons).post(createReason);

@@ -8,8 +8,9 @@ const userRoutes = require("./routes/userRoutes.js");
 const districtRoutes = require("./routes/districtRoutes.js");
 const vehicleRoutes = require("./routes/vehicleRoutes.js");
 const driverRoutes = require("./routes/driverRoutes.js");
-const accidentResultRoutes = require("./routes/accidentResultRoutes.js");
 const weatherRoutes = require("./routes/weatherRoutes.js");
+const accidentDriverRoutes = require("./routes/accidentDriverRoutes.js");
+const accidentReasonRoutes = require("./routes/accidentReasonRoutes.js");
 const accidentTypeRoutes = require("./routes/accidentTypeRoutes.js");
 const globalErrorHandler = require("./middleware/globalErrorHandler.js");
 
@@ -28,8 +29,9 @@ app.use("/api/districts", districtRoutes);
 app.use("/api/reasons", reasonRoutes);
 app.use("/api/vehicles", vehicleRoutes);
 app.use("/api/drivers", driverRoutes);
-app.use("/api/accidentResults", accidentResultRoutes);
 app.use("/api/weathers", weatherRoutes);
+app.use("/api/accidentDrivers", accidentDriverRoutes);
+app.use("/api/accidentReasons", accidentReasonRoutes);
 app.use("/api/accidentTypes", accidentTypeRoutes);
 
 

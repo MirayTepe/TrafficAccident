@@ -15,9 +15,7 @@ const vehicleSchema = new mongoose.Schema({
     enum: ['Var', 'Yok'],
   } ,
  
-  speed :{
-      type: Number
-  }
+
 });
 
 

@@ -24,7 +24,12 @@ const getDistricts = async (req, res) => {
   const districts = await DistrictRepository.getAll();
   res.status(200).json({
     count: districts.length,
-    data: districts,
+    data: districts.map(district => ({
+      _id: district._id,
+      districtName: district.districtName,
+      streetName: district.streetName,
+      location: district.location, // Eğer location bilgisini almak istiyorsanız
+    })),
   });
 };
 
@@ -40,8 +45,8 @@ const getDistrictById = async (req, res) => {
 
 const updateDistrict = async (req, res) => {
   const id  = req.params.id;
-  const { district_name,street_name } = req.body;
-  const result = await DistrictRepository.update(id, { district_name,street_name }, { new: true });
+  const { districtName,streetName,location } = req.body;
+  const result = await DistrictRepository.update(id, { districtName,streetName,location },);
   if (!result) {
     res.status(404);
     throw new Error('District not found');
