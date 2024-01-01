@@ -6,13 +6,18 @@ const {
     getAccidentReasonById,
     updateAccidentReason ,
     deleteAccidentReason ,
+    getAccidentCountsByReason
 } = require('../controllers/accidentReasonController');
 
 const accidentReasonRouter = express.Router();
 
-// Routes
-accidentReasonRouter.route('/').get(getAccidentReasons).post(createAccidentReason);
+// Rotayı önce 'counts-by-reason' ile eşleşecek şekilde düzenle
+accidentReasonRouter.route('/counts-by-reason').get(getAccidentCountsByReason);
 
+// Diğer rotaları belirli bir ID ile eşleşecek şekilde sırala
 accidentReasonRouter.route('/:id').get(getAccidentReasonById).put(updateAccidentReason).delete(deleteAccidentReason);
 
-module.exports=accidentReasonRouter;
+// Son olarak diğer rotaları eşleşecek şekilde sırala
+accidentReasonRouter.route('/').get(getAccidentReasons).post(createAccidentReason);
+
+module.exports = accidentReasonRouter;

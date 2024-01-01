@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 
 const {
   getAccidents,
@@ -9,20 +10,26 @@ const {
   updateAccident,
   deleteAccident,
   getAccidentsByDate,
-  getAccidentsByDistrict,
-  getAccidentsByReason,
+  accidentCountsByMonth,
   getAccidentsByTime,
+  getAccidentsGroupedByWeather,
+  getAccidentsMapData,
 } = require('../controllers/accidentController');
 
-const router = express.Router();
-
 // Routes
-router.route('/getAllAccidentsSortedByDateAsc').get(getAllAccidentsSortedByDateAsc);
-router.route('/getAllAccidentsSortedByDateDesc').get(getAllAccidentsSortedByDateDesc);
-router.route('/getAccidentsByReason').get(getAccidentsByReason);
-router.route('/getAccidentsByTime/:hour/:minute').get(getAccidentsByTime);
-router.route('/').get(getAccidents).post(createAccident);
+router.get('/getAccidentsGroupedByWeather', getAccidentsGroupedByWeather);
+router.get('/getAllAccidentsSortedByDateAsc', getAllAccidentsSortedByDateAsc);
+router.get('/getAllAccidentsSortedByDateDesc', getAllAccidentsSortedByDateDesc);
+router.get('/getAccidentsByTime/:hour/:minute', getAccidentsByTime);
+router.get('/getAccidentsMapData', getAccidentsMapData); // Eklenen kısım
+router.route('/')
+  .get(getAccidents)
+  .post(createAccident);
 
-router.route('/:id').get(getAccidentById).put(updateAccident).delete(deleteAccident);
+router.get('/accidents-by-month', accidentCountsByMonth);
+router.route('/:id')
+  .get(getAccidentById)
+  .put(updateAccident)
+  .delete(deleteAccident);
 
 module.exports = router;

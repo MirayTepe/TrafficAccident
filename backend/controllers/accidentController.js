@@ -32,7 +32,7 @@ const getAccidentById = async (req, res) => {
 const updateAccident = async (req, res) => {
   const  id  = req.params.id;
   const { accidentType,district,date,time,weather, injuryCount,deathCount } = req.body;
-  const result = await AccidentRepository.update(id, { accidentType,district,date,time,weather, injuryCount,deathCount  },{ path: 'district   weather accidentType' });
+  const result = await AccidentRepository.update(id, { accidentType,district,date,time,weather, injuryCount,deathCount  },{ path: 'district weather accidentType' });
   if (!result) {
     res.status(404);
     throw new Error('Accident not found');
@@ -66,24 +66,25 @@ const getAccidentsByDate = async (req, res) => {
   res.json(accidents);
 };
 
-const getAccidentsByDistrict = async (req, res) => {
+const accidentCountsByMonth = async (req, res) => {
 
-  const { district } = req.params;
-  const accidents = await AccidentRepository.getAccidentsByDistrict(district);
-  res.status(200).json({
-    count: accidents.length,
-    data: accidents,
-  });
+  const accidentCounts = await AccidentRepository.getAccidentCountsByMonth();
+  res.json(accidentCounts);
 };
-const getAccidentsByReason = async (req, res) => {
 
-  const { reason } = req.params;
-  const accidents = await AccidentRepository.getAccidentsByReason(reason);
-  res.status(200).json({
-    count: accidents.length,
-    data: accidents,
-  });
-};
+
+  const getAccidentsGroupedByWeather = async (req, res) => {
+    const result = await AccidentRepository.getAccidentsGroupedByWeather();
+    const formattedData = result.map(item => ({
+      id: item.id,
+      data: item.data.reduce((acc, curr) => {
+        acc[curr.id] = curr.count;
+        return acc;
+      }, {}),
+    }));
+    res.json(formattedData);
+  }
+
 
 
 const getAccidentsByTime = async (req, res) => {
@@ -99,6 +100,18 @@ const getAccidentsByTime = async (req, res) => {
       count: accidents.length,
       data: accidents,
     });
+
+}
+    
+const getAccidentsMapData = async (req, res) => {
+ 
+    const mapData = await AccidentRepository.getAccidentsMapData();
+    res.status(200).json({
+      count: mapData.length,
+      data: mapData,
+    });
+
+
 }
 module.exports = {
   getAccidents,
@@ -109,7 +122,9 @@ module.exports = {
   updateAccident,
   deleteAccident,
   getAccidentsByDate,
-  getAccidentsByDistrict,
   getAccidentsByTime,
-  getAccidentsByReason,
+  accidentCountsByMonth,
+  getAccidentsGroupedByWeather,
+  getAccidentsMapData
+
 };

@@ -9,9 +9,11 @@ const districtRoutes = require("./routes/districtRoutes.js");
 const vehicleRoutes = require("./routes/vehicleRoutes.js");
 const driverRoutes = require("./routes/driverRoutes.js");
 const weatherRoutes = require("./routes/weatherRoutes.js");
+const eventRoutes = require("./routes/eventRoutes.js");
 const accidentDriverRoutes = require("./routes/accidentDriverRoutes.js");
 const accidentReasonRoutes = require("./routes/accidentReasonRoutes.js");
 const accidentTypeRoutes = require("./routes/accidentTypeRoutes.js");
+const faqRoutes = require("./routes/faqRoutes.js");
 const globalErrorHandler = require("./middleware/globalErrorHandler.js");
 
 const app = express();
@@ -33,6 +35,9 @@ app.use("/api/weathers", weatherRoutes);
 app.use("/api/accidentDrivers", accidentDriverRoutes);
 app.use("/api/accidentReasons", accidentReasonRoutes);
 app.use("/api/accidentTypes", accidentTypeRoutes);
+app.use("/api/calendar-events", eventRoutes);
+app.use("/api/faq", faqRoutes);
+
 
 
 app.use(globalErrorHandler);

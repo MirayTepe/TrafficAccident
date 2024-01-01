@@ -20,7 +20,7 @@ const getDrivers = async (req, res) => {
 
 const getDriverById = async (req, res) => {
   const id  = req.params.id;
-  const driver = await DriverRepostory.getById(id,{ path: ' vehicle' });
+  const driver = await DriverRepostory.getById(id,{ path: 'vehicle' });
   if (!driver) {
     res.status(404);
     throw new Error('Driver not found');
@@ -30,8 +30,8 @@ const getDriverById = async (req, res) => {
 
 const updateDriver = async (req, res) => {
   const id = req.params.id;
-  const { firstName,lastName,vehicle,gender  } = req.body;
-  const result = await AccidentRepostory.update(id, {firstName,lastName,vehicle,gender  },{ path: ' vehicle' }, { new: true });
+  const { firstName,lastName,vehicle,gender,age,speed,alcoholLevel} = req.body;
+  const result = await DriverRepostory.update(id, {firstName,lastName,vehicle,gender,age ,speed ,alcoholLevel},{ path: 'vehicle' });
   if (!result) {
     res.status(404);
     throw new Error('Driver not found');
@@ -41,7 +41,7 @@ const updateDriver = async (req, res) => {
 
 const deleteDriver = async (req, res) => {
   const id  = req.params.id;
-  const result = await DriverRepostory.delete(id,{ path: ' vehicle' });
+  const result = await DriverRepostory.delete(id,{ path: 'vehicle' });
   if (!result) {
     res.status(404);
     throw new Error('Driver not found');

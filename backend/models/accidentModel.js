@@ -16,7 +16,7 @@ const accidentSchema = new mongoose.Schema({
     type: String,
     required: true,
     get: function () {
-      const date = new Date(this.value);
+      const date = new Date(this);
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Ay endeksleri 0'dan başlar, bu yüzden +1 ekliyoruz.
       const year = date.getFullYear().toString();

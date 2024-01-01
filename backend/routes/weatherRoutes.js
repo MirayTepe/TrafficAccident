@@ -8,11 +8,11 @@ const {
     deleteWeather
 } = require('../controllers/weatherController');
 
-const reasonRouter = express.Router();
+const weatherRoutes = express.Router();
 
 // Routes
-reasonRouter.route('/').get(getWeathers).post(createWeather);
+weatherRoutes.route('/').get(getWeathers).post(createWeather);
 
-reasonRouter.route('/:id').get(getWeatherById).put(updateWeather).delete(deleteWeather);
+weatherRoutes.route('/:id').get(getWeatherById).put(updateWeather).delete(deleteWeather);
 
-module.exports=reasonRouter;
+module.exports=weatherRoutes;

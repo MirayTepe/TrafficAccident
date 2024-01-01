@@ -32,7 +32,7 @@ const getReasonById =async (req, res) => {
 const updateReason = async (req, res) => {
   const id  = req.params.id;
   const { reasonDetail } = req.body;
-  const result = await ReasonRepostory.update(id, { reasonDetail }, { new: true });
+  const result = await ReasonRepostory.update(id, { reasonDetail });
   if (!result) {
     res.status(404);
     throw new Error('Reason not found');
